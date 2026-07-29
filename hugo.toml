@@ -1,7 +1,6 @@
 baseURL = "https://x.ztop.cc/"
 languageCode = "zh-cn"
 title = "ZTOP"
-theme = "hugo-theme-stack"
 
 [pagination]
   pagerSize = 10
