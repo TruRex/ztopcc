@@ -1,0 +1,264 @@
+/* ZTOP Hugo Site */
+:root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --accent: #f59e0b;
+    --accent-hover: #fbbf24;
+    --border: #2a2a2a;
+    --radius: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/* Header */
+.site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.site-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+}
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.site-nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+.site-nav a:hover { color: var(--text); }
+
+/* Auth buttons */
+.auth-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+.btn-login, .btn-signup, .btn-logout {
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.btn-login {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+.btn-login:hover { border-color: var(--text-dim); }
+.btn-signup {
+    background: var(--accent);
+    color: #000;
+}
+.btn-signup:hover { background: var(--accent-hover); }
+.btn-logout {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+}
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.user-avatar img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+/* Main */
+main {
+    flex: 1;
+    padding: 3rem 0;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+}
+.hero-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+.hero h1 {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+}
+.hero-subtitle {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+}
+
+/* Post list */
+.post-list { margin-top: 2rem; }
+.post-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    transition: border-color 0.2s;
+}
+.post-card:hover { border-color: var(--accent); }
+.post-card h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+}
+.post-card h2 a {
+    color: var(--text);
+    text-decoration: none;
+}
+.post-card h2 a:hover { color: var(--accent); }
+.post-meta {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.tag {
+    background: var(--border);
+    padding: 0.15em 0.6em;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+.post-card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+}
+.read-more {
+    display: inline-block;
+    margin-top: 0.75rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+/* Single post */
+.single-post header {
+    margin-bottom: 2rem;
+}
+.single-post h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+.post-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+.post-content h2 { font-size: 1.5rem; margin: 2rem 0 0.75rem; }
+.post-content h3 { font-size: 1.25rem; margin: 1.5rem 0 0.5rem; }
+.post-content p { margin-bottom: 1.25rem; }
+.post-content a { color: var(--accent); }
+.post-content img {
+    max-width: 100%;
+    border-radius: var(--radius);
+    margin: 1.5rem 0;
+}
+.post-content pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+}
+.post-content code {
+    font-family: 'SF Mono', Consolas, monospace;
+    font-size: 0.9rem;
+}
+.post-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    color: var(--text-dim);
+    margin: 1.25rem 0;
+}
+
+/* Gate wall */
+.gate-wall {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--surface);
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    margin: 2rem 0;
+}
+.gate-wall p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.gate-wall button {
+    padding: 0.6rem 1.5rem;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+.pagination a {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    text-decoration: none;
+}
+.pagination a:hover { border-color: var(--accent); }
+
+/* Footer */
+.site-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 0;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+}

@@ -1,0 +1,47 @@
+baseURL = "https://x.ztop.cc/"
+languageCode = "zh-cn"
+title = "ZTOP"
+theme = "hugo-theme-stack"
+paginate = 10
+
+[params]
+  mainSections = ["posts"]
+  featuredImageField = "image"
+  rssFullContent = true
+  
+  # Sidebar
+  [params.sidebar]
+    emoji = "🤡"
+    subtitle = "Stay weird, stay ztop"
+    avatar = "images/avatar.png"
+  
+  # Article
+  [params.article]
+    math = false
+    toc = true
+    readingTime = true
+  
+  # Comments (Memberstack handles auth)
+  [params.comments]
+    enabled = false
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 3
+
+[markup]
+  [markup.highlight]
+    style = "dracula"

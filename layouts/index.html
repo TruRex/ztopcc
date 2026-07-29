@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="home">
+    {{ with .Site.Params.sidebar }}
+    <div class="hero">
+        {{ if .avatar }}<img src="{{ .avatar | relURL }}" class="hero-avatar">{{ end }}
+        <h1>{{ $.Site.Title }}</h1>
+        <p class="hero-subtitle">{{ .subtitle }}</p>
+    </div>
+    {{ end }}
+    
+    <div class="post-list">
+        {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
+        {{ range $paginator.Pages }}
+        <article class="post-card">
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            <div class="post-meta">
+                <time>{{ .Date.Format "2006-01-02" }}</time>
+                {{ with .Params.tags }}
+                <span class="tags">
+                    {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+                </span>
+                {{ end }}
+            </div>
+            <p>{{ .Summary }}</p>
+            <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+        </article>
+        {{ end }}
+        
+        {{ template "_internal/pagination.html" . }}
+    </div>
+</div>
+{{ end }}

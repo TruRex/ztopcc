@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
+    
+    {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+    
+    <!-- Memberstack -->
+    <script src="https://api.memberstack.io/static/memberstack.js?custom" data-memberstack-id="YOUR_MEMBERSTACK_ID"></script>
+    
+    {{ if .Site.Params.favicon }}
+    <link rel="icon" href="{{ .Site.Params.favicon }}">
+    {{ end }}
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="site-title">🤡 {{ .Site.Title }}</a>
+            <nav class="site-nav">
+                {{ range .Site.Menus.main }}
+                <a href="{{ .URL }}">{{ .Name }}</a>
+                {{ end }}
+                <div id="memberstack-auth" class="auth-buttons">
+                    <button onclick="MemberStack.showLogin()" class="btn-login">Login</button>
+                    <button onclick="MemberStack.showSignup()" class="btn-signup">Sign Up</button>
+                </div>
+                <div id="memberstack-profile" class="user-menu" style="display:none">
+                    <span class="user-avatar"></span>
+                    <span class="user-name"></span>
+                    <button onclick="MemberStack.logout()" class="btn-logout">Logout</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        {{ block "main" . }}{{ end }}
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ now.Year }} {{ .Site.Title }}</p>
+        </div>
+    </footer>
+    
+    <script src="{{ "js/memberstack.js" | relURL }}"></script>
+</body>
+</html>
