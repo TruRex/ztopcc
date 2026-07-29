@@ -2,7 +2,9 @@ baseURL = "https://x.ztop.cc/"
 languageCode = "zh-cn"
 title = "ZTOP"
 theme = "hugo-theme-stack"
-paginate = 10
+
+[pagination]
+  pagerSize = 10
 
 [params]
   mainSections = ["posts"]
@@ -43,5 +45,10 @@ paginate = 10
     weight = 3
 
 [markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
   [markup.highlight]
     style = "dracula"
+
+ignoreLogs = ['warning-goldmark-raw-html']
