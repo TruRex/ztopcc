@@ -15,7 +15,7 @@ title = "ZTOP"
   [params.sidebar]
     emoji = "🤡"
     subtitle = "Stay weird, stay ztop"
-    avatar = "images/avatar.png"
+    avatar = "images/avatar.webp"
   
   # Article
   [params.article]
