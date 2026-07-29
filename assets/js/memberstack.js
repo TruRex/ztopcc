@@ -1,47 +1,45 @@
-// Memberstack integration for Hugo
-// Replace YOUR_MEMBERSTACK_ID with your actual Memberstack ID
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Listen for Memberstack auth state changes
-    window.MemberStack = window.MemberStack || {};
-    
-    MemberStack.onReady = function(member) {
-        const authDiv = document.getElementById('memberstack-auth');
-        const profileDiv = document.getElementById('memberstack-profile');
+// Memberstack integration for ZTOP Hugo site
+(function() {
+    function onMemberStackReady(member) {
+        var authDiv = document.getElementById('memberstack-auth');
+        var profileDiv = document.getElementById('memberstack-profile');
         
         if (member && member.id) {
             // Logged in
             if (authDiv) authDiv.style.display = 'none';
             if (profileDiv) {
                 profileDiv.style.display = 'flex';
-                const avatar = profileDiv.querySelector('.user-avatar');
-                const name = profileDiv.querySelector('.user-name');
+                var avatar = profileDiv.querySelector('.user-avatar');
+                var nameEl = profileDiv.querySelector('.user-name');
                 if (avatar && member.profileImage) {
-                    avatar.innerHTML = '<img src="' + member.profileImage + '" alt="">';
+                    avatar.innerHTML = '<img src="' + member.profileImage + '" alt="" />';
+                } else if (avatar) {
+                    avatar.textContent = member.name ? member.name.charAt(0).toUpperCase() : '?';
+                    avatar.style.cssText = 'width:28px;height:28px;border-radius:50%;background:var(--accent);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;';
                 }
-                if (name) {
-                    name.textContent = member.name || member.email || 'Member';
+                if (nameEl) {
+                    nameEl.textContent = member.name || member.email || 'Member';
                 }
             }
-            
-            // Check content gating
-            checkContentAccess(member);
         } else {
-            // Not logged in
             if (authDiv) authDiv.style.display = 'flex';
             if (profileDiv) profileDiv.style.display = 'none';
-            checkContentAccess(null);
         }
-    };
-    
-    function checkContentAccess(member) {
-        const gatedContent = document.querySelectorAll('[data-ms-content]');
-        gatedContent.forEach(el => {
-            const requiredPlan = el.getAttribute('data-ms-content');
-            if (!member) {
-                el.innerHTML = '<div class="gate-wall"><p>🔒 This content requires membership</p><button onclick="MemberStack.showSignup()">Sign Up to View</button></div>';
-            }
-            // Memberstack handles plan-based gating automatically via its own DOM scanning
-        });
     }
-});
+
+    // Memberstack script tag sets window.MemberStack and calls .onReady when ready
+    if (window.MemberStack) {
+        MemberStack.onReady = onMemberStackReady;
+    } else {
+        // Poll until MemberStack is available
+        var attempts = 0;
+        var interval = setInterval(function() {
+            if (window.MemberStack) {
+                clearInterval(interval);
+                MemberStack.onReady = onMemberStackReady;
+            } else if (++attempts > 50) {
+                clearInterval(interval);
+            }
+        }, 100);
+    }
+})();
