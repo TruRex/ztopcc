@@ -1,0 +1,11 @@
+{{/*
+  gate shortcode — membership content gating with hierarchy
+  FM → CM → SM → GM (each higher level inherits all lower levels)
+  Usage: {{< gate "SM" >}} ... {{< /gate >}}
+*/}}
+{{ $level := .Get 0 }}
+{{ $levels := dict "GM" "GM,SM,CM,FM" "SM" "SM,CM,FM" "CM" "CM,FM" "FM" "FM" }}
+{{ $list := index $levels $level | default $level }}
+<div data-ms-content="{{ $list }}">
+{{ .Inner | markdownify }}
+</div>

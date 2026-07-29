@@ -8,25 +8,47 @@ Welcome to the new ZTOP site! This is our first post.
 
 ## What's new
 
-We migrated from Ghost to Hugo for better performance and flexibility. The site is now:
+We migrated from Ghost to Hugo for better performance and flexibility.
 
 - **Static HTML** — blazing fast, no database
 - **Markdown content** — write posts in your favorite editor
 - **Git versioned** — all content tracked in Git
-- **Memberstack** — membership without Stripe complexity
+- **Memberstack** — 4-tier membership: FM → CM → SM → GM
 
 ## Public Preview
 
 This part is visible to everyone. No login required.
 
-<div data-ms-content="members-only">
+{{< gate "FM" >}}
 
-## Members Only
+## Free Member — FM
 
-This section requires a Memberstack membership to view. 
+All members can see this. Get started by signing up!
 
-If you can see this, you're logged in! 🎉
+{{< /gate >}}
 
-</div>
+{{< gate "CM" >}}
+
+## Core Member — CM
+
+CM and above exclusive. Deeper insights.
+
+{{< /gate >}}
+
+{{< gate "SM" >}}
+
+## Senior Member — SM
+
+Senior level content. Strategy and analysis.
+
+{{< /gate >}}
+
+{{< gate "GM" >}}
+
+## Gold Member — GM
+
+Top-tier exclusive. The best stuff here.
+
+{{< /gate >}}
 
 Stay tuned for more content!
